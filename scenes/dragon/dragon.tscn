@@ -1,0 +1,290 @@
+[gd_scene load_steps=20 format=3 uid="uid://0iu2yfsjuto4"]
+
+[ext_resource type="Script" uid="uid://3nukjxytm5k4" path="res://scenes/dragon/dragon.gd" id="1_4sjrj"]
+[ext_resource type="Texture2D" uid="uid://ce6chqcpx0kbe" path="res://assets/dragon_Tail1_000.png" id="1_ut8cy"]
+[ext_resource type="Texture2D" uid="uid://dcnkerhmuk8bx" path="res://assets/dragon_Tail2_000.png" id="2_4sjrj"]
+[ext_resource type="Script" uid="uid://cmmyp6yb7p2f1" path="res://scripts/armeture.gd" id="3_0gvji"]
+[ext_resource type="Texture2D" uid="uid://dku7ypd01rw32" path="res://assets/dragon_Tail3_000.png" id="3_8ql4m"]
+[ext_resource type="Texture2D" uid="uid://5je1wxxbew0x" path="res://assets/dragon_Hips_000.png" id="4_0gvji"]
+[ext_resource type="Texture2D" uid="uid://qc180itck56x" path="res://assets/dragon_BackThigh_000.png" id="5_esirm"]
+[ext_resource type="Texture2D" uid="uid://q60iq7skmlkq" path="res://assets/dragon_BackFoot_000.png" id="6_0uu3o"]
+[ext_resource type="Texture2D" uid="uid://bdp7rxb8yl24y" path="res://assets/dragon_BackShin_000.png" id="7_2fol4"]
+[ext_resource type="Texture2D" uid="uid://dlgmgq8cbi6ei" path="res://assets/dragon_Belly_000.png" id="8_11spx"]
+[ext_resource type="Texture2D" uid="uid://bsvs212bsxnd4" path="res://assets/dragon_LowerNeck_000.png" id="9_rjgf0"]
+[ext_resource type="Texture2D" uid="uid://dmlskpfkygwif" path="res://assets/dragon_UpperNeck_000.png" id="10_xa010"]
+[ext_resource type="Texture2D" uid="uid://c56gm4tjep52" path="res://assets/dragon_Head_000.png" id="11_855dp"]
+[ext_resource type="Texture2D" uid="uid://cla2qpqx4u3iq" path="res://assets/dragon_Torso_000.png" id="12_t4beu"]
+[ext_resource type="Texture2D" uid="uid://bybb2l123c1ov" path="res://assets/dragon_FrontFoot_000.png" id="13_jasqd"]
+[ext_resource type="Texture2D" uid="uid://e2jgdb88row0" path="res://assets/dragon_FrontShin_000.png" id="14_5fhal"]
+[ext_resource type="Texture2D" uid="uid://cjdkgb7vbhkd" path="res://assets/dragon_FrontThight_000.png" id="15_y8f16"]
+[ext_resource type="Texture2D" uid="uid://b8hsruvyqesfq" path="res://assets/dragon.png" id="16_qhnyx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ut8cy"]
+radius = 7.0
+height = 42.0
+
+[node name="Dragon" type="CharacterBody2D" node_paths=PackedStringArray("selected_node")]
+z_index = -2
+collision_layer = 4
+script = ExtResource("1_4sjrj")
+angle_color = Color(0, 0.660058, 0.442215, 0.513726)
+selected_node = NodePath("Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin")
+max_angle = 90.0
+set_angle = 0.451
+
+[node name="Armature" type="Node2D" parent="." node_paths=PackedStringArray("agent", "root_bone_node", "node_references")]
+z_index = 2
+script = ExtResource("3_0gvji")
+agent = NodePath("..")
+root_bone_node = NodePath("../Visual/DragonBelly")
+node_references = {
+0: NodePath("../Visual/DragonBelly"),
+1: NodePath("../Visual/DragonBelly/DragonHips"),
+2: NodePath("../Visual/DragonBelly/DragonHips/LegBackBack"),
+3: NodePath("../Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh"),
+4: NodePath("../Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh/DragonBackShin"),
+5: NodePath("../Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh/DragonBackShin/DragonBackFoot"),
+6: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront"),
+7: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh"),
+8: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin"),
+9: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin/DragonBackFoot"),
+10: NodePath("../Visual/DragonBelly/DragonHips/DragonTail1"),
+11: NodePath("../Visual/DragonBelly/DragonHips/DragonTail1/DragonTail2"),
+12: NodePath("../Visual/DragonBelly/DragonHips/DragonTail1/DragonTail2/DragonTail3"),
+13: NodePath("../Visual/DragonBelly/DragonTorso"),
+14: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack"),
+15: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight"),
+16: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight/DragonFrontShin"),
+17: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight/DragonFrontShin/DragonFrontFoot"),
+18: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront"),
+19: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight"),
+20: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight/DragonFrontShin"),
+21: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight/DragonFrontShin/DragonFrontFoot"),
+22: NodePath("../Visual/DragonBelly/DragonTorso/DragonLowerNeck"),
+23: NodePath("../Visual/DragonBelly/DragonTorso/DragonLowerNeck/DragonUpperNeck"),
+24: NodePath("../Visual/DragonBelly/DragonTorso/DragonLowerNeck/DragonUpperNeck/DragonHead")
+}
+joints = Array[Vector2]([Vector2(0, 0), Vector2(-8, 3), Vector2(-14, 7), Vector2(-14, 7), Vector2(-16, 19), Vector2(-25, 27), Vector2(-17, 7), Vector2(-17, 7), Vector2(-19, 19), Vector2(-28, 27), Vector2(-20, 4), Vector2(-33, 12), Vector2(-44.7425, 20.007), Vector2(9, 4), Vector2(26, 13), Vector2(26, 13), Vector2(23, 25), Vector2(29, 34), Vector2(22, 13), Vector2(22, 13), Vector2(19, 25), Vector2(25, 34), Vector2(28, 12), Vector2(35, 8), Vector2(39.8315, -3.0298)])
+bone_hierachy = Dictionary[int, Dictionary]({
+0: {
+"children": Array[int]([13, 1])
+},
+1: {
+"children": Array[int]([10, 6, 2])
+},
+2: {
+"children": Array[int]([3])
+},
+3: {
+"children": Array[int]([4])
+},
+4: {
+"children": Array[int]([5])
+},
+5: {
+"children": Array[int]([])
+},
+6: {
+"children": Array[int]([7])
+},
+7: {
+"children": Array[int]([8])
+},
+8: {
+"children": Array[int]([9])
+},
+9: {
+"children": Array[int]([])
+},
+10: {
+"children": Array[int]([11])
+},
+11: {
+"children": Array[int]([12])
+},
+12: {
+"children": Array[int]([])
+},
+13: {
+"children": Array[int]([22, 18, 14])
+},
+14: {
+"children": Array[int]([15])
+},
+15: {
+"children": Array[int]([16])
+},
+16: {
+"children": Array[int]([17])
+},
+17: {
+"children": Array[int]([])
+},
+18: {
+"children": Array[int]([19])
+},
+19: {
+"children": Array[int]([20])
+},
+20: {
+"children": Array[int]([21])
+},
+21: {
+"children": Array[int]([])
+},
+22: {
+"children": Array[int]([23])
+},
+23: {
+"children": Array[int]([24])
+},
+24: {
+"children": Array[int]([])
+}
+})
+debug_draw = true
+metadata/_custom_type_script = "uid://cmmyp6yb7p2f1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ut8cy")
+
+[node name="Dragon" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.993814, 0.609168, 0.686732, 0.564706)
+z_index = 1
+position = Vector2(-9, 7)
+texture = ExtResource("16_qhnyx")
+
+[node name="Visual" type="CanvasGroup" parent="."]
+z_index = -2
+fit_margin = 1024.0
+clear_margin = 461.0
+
+[node name="DragonBelly" type="Sprite2D" parent="Visual"]
+texture = ExtResource("8_11spx")
+offset = Vector2(0.5, 0)
+
+[node name="DragonTorso" type="Sprite2D" parent="Visual/DragonBelly"]
+position = Vector2(9, 4)
+texture = ExtResource("12_t4beu")
+offset = Vector2(8, 1)
+
+[node name="DragonLowerNeck" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso"]
+position = Vector2(19, 8)
+texture = ExtResource("9_rjgf0")
+offset = Vector2(3, -1)
+
+[node name="DragonUpperNeck" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso/DragonLowerNeck"]
+position = Vector2(7, -4)
+texture = ExtResource("10_xa010")
+offset = Vector2(4, -5.5)
+
+[node name="DragonHead" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso/DragonLowerNeck/DragonUpperNeck"]
+position = Vector2(4.83152, -11.0298)
+texture = ExtResource("11_855dp")
+offset = Vector2(6, -2)
+
+[node name="LegFrontFront" type="Node2D" parent="Visual/DragonBelly/DragonTorso"]
+position = Vector2(13, 9)
+
+[node name="DragonFrontThight" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso/LegFrontFront"]
+texture = ExtResource("15_y8f16")
+offset = Vector2(-0.5, 5)
+
+[node name="DragonFrontShin" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight"]
+position = Vector2(-3, 12)
+texture = ExtResource("14_5fhal")
+offset = Vector2(1.5, 3.5)
+
+[node name="DragonFrontFoot" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight/DragonFrontShin"]
+position = Vector2(6, 9)
+texture = ExtResource("13_jasqd")
+offset = Vector2(3, 1)
+
+[node name="LegFrontBack" type="Node2D" parent="Visual/DragonBelly/DragonTorso"]
+modulate = Color(0.511558, 0.511558, 0.511558, 1)
+z_index = -1
+position = Vector2(17, 9)
+
+[node name="DragonFrontThight" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso/LegFrontBack"]
+texture = ExtResource("15_y8f16")
+offset = Vector2(0, 5)
+
+[node name="DragonFrontShin" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight"]
+position = Vector2(-3, 12)
+texture = ExtResource("14_5fhal")
+offset = Vector2(2, 4)
+
+[node name="DragonFrontFoot" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight/DragonFrontShin"]
+position = Vector2(6, 9)
+texture = ExtResource("13_jasqd")
+offset = Vector2(3, 1)
+
+[node name="DragonHips" type="Sprite2D" parent="Visual/DragonBelly"]
+z_index = -1
+position = Vector2(-8, 3)
+texture = ExtResource("4_0gvji")
+offset = Vector2(-5, 0)
+
+[node name="DragonTail1" type="Sprite2D" parent="Visual/DragonBelly/DragonHips"]
+position = Vector2(-12, 1)
+texture = ExtResource("1_ut8cy")
+offset = Vector2(-7, 3)
+
+[node name="DragonTail2" type="Sprite2D" parent="Visual/DragonBelly/DragonHips/DragonTail1"]
+position = Vector2(-13, 8)
+rotation = 0.0872665
+texture = ExtResource("2_4sjrj")
+offset = Vector2(-5, 4)
+
+[node name="DragonTail3" type="Sprite2D" parent="Visual/DragonBelly/DragonHips/DragonTail1/DragonTail2"]
+position = Vector2(-11, 9)
+rotation = 0.18326
+texture = ExtResource("3_8ql4m")
+offset = Vector2(-8, 4)
+
+[node name="LegBackFront" type="Node2D" parent="Visual/DragonBelly/DragonHips"]
+position = Vector2(-9, 4)
+
+[node name="DragonBackThigh" type="Sprite2D" parent="Visual/DragonBelly/DragonHips/LegBackFront"]
+texture = ExtResource("5_esirm")
+offset = Vector2(-0.5, 5.5)
+
+[node name="DragonBackShin" type="Sprite2D" parent="Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh"]
+position = Vector2(-2, 12)
+texture = ExtResource("7_2fol4")
+offset = Vector2(-4, 3)
+
+[node name="DragonBackFoot" type="Sprite2D" parent="Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin"]
+position = Vector2(-9, 8)
+texture = ExtResource("6_0uu3o")
+offset = Vector2(3.5, 3.5)
+
+[node name="LegBackBack" type="Node2D" parent="Visual/DragonBelly/DragonHips"]
+modulate = Color(0.600561, 0.600561, 0.600561, 1)
+z_index = -1
+position = Vector2(-6, 4)
+
+[node name="DragonBackThigh" type="Sprite2D" parent="Visual/DragonBelly/DragonHips/LegBackBack"]
+texture = ExtResource("5_esirm")
+offset = Vector2(-0.5, 5.5)
+
+[node name="DragonBackShin" type="Sprite2D" parent="Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh"]
+position = Vector2(-2, 12)
+texture = ExtResource("7_2fol4")
+offset = Vector2(-4, 3)
+
+[node name="DragonBackFoot" type="Sprite2D" parent="Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh/DragonBackShin"]
+position = Vector2(-9, 8)
+texture = ExtResource("6_0uu3o")
+offset = Vector2(3.5, 3.5)
+
+[node name="LowFloorRaycast" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+target_position = Vector2(0, 25)
+
+[node name="HighFloorRaycast" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+target_position = Vector2(0, 38)

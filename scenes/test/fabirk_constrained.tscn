@@ -1,0 +1,203 @@
+[gd_scene load_steps=7 format=3 uid="uid://d08gsghjpvyrf"]
+
+[ext_resource type="Script" uid="uid://bqff467vhg0vt" path="res://scenes/test/tentacle_moster.gd" id="1_4xx25"]
+[ext_resource type="Script" uid="uid://din1s36qn7xkr" path="res://fps_label.gd" id="2_4xx25"]
+[ext_resource type="Texture2D" uid="uid://bno8qro767j05" path="res://assets/blob.png" id="3_ffdst"]
+[ext_resource type="PackedScene" uid="uid://ckpv4jv12w8im" path="res://scenes/levels/level.ldtk" id="3_h8isb"]
+
+[sub_resource type="Curve" id="Curve_h8isb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.118644, 0.927787), 0.0, 0.0, 0, 0, Vector2(0.327482, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h8isb"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="level" parent="." instance=ExtResource("3_h8isb")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(270, 258)
+zoom = Vector2(0.5, 0.5)
+
+[node name="TentacleMonster6" type="CharacterBody2D" parent="."]
+modulate = Color(1, 0, 1, 1)
+z_index = 1
+position = Vector2(6.55054, -363.39)
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_4xx25")
+y_velocity_per_tentacle_count = SubResource("Curve_h8isb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleMonster6"]
+shape = SubResource("CircleShape2D_h8isb")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="TentacleMonster6"]
+target_desired_distance = 32.0
+navigation_layers = 3
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 16.0
+neighbor_distance = 16.0
+time_horizon_obstacles = 1.0
+max_speed = 256.0
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0.564706, 1, 1)
+
+[node name="RayCast2D" type="RayCast2D" parent="TentacleMonster6"]
+
+[node name="Sprite2D" type="Sprite2D" parent="TentacleMonster6"]
+texture = ExtResource("3_ffdst")
+
+[node name="TentacleMonster5" type="CharacterBody2D" parent="."]
+modulate = Color(0.810452, 0.410094, 0, 1)
+z_index = 1
+position = Vector2(1127, -234)
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_4xx25")
+y_velocity_per_tentacle_count = SubResource("Curve_h8isb")
+min_statinary_velocity = Vector2(8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleMonster5"]
+shape = SubResource("CircleShape2D_h8isb")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="TentacleMonster5"]
+target_desired_distance = 32.0
+navigation_layers = 3
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 16.0
+neighbor_distance = 16.0
+time_horizon_obstacles = 1.0
+max_speed = 256.0
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0.564706, 1, 1)
+
+[node name="RayCast2D" type="RayCast2D" parent="TentacleMonster5"]
+
+[node name="Sprite2D" type="Sprite2D" parent="TentacleMonster5"]
+texture = ExtResource("3_ffdst")
+
+[node name="TentacleMonster4" type="CharacterBody2D" parent="."]
+modulate = Color(0.492041, 0.582781, 1.92523e-07, 1)
+z_index = 1
+position = Vector2(467.156, 630.295)
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_4xx25")
+y_velocity_per_tentacle_count = SubResource("Curve_h8isb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleMonster4"]
+shape = SubResource("CircleShape2D_h8isb")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="TentacleMonster4"]
+target_desired_distance = 32.0
+navigation_layers = 3
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 16.0
+neighbor_distance = 16.0
+time_horizon_obstacles = 1.0
+max_speed = 256.0
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0.564706, 1, 1)
+
+[node name="RayCast2D" type="RayCast2D" parent="TentacleMonster4"]
+
+[node name="Sprite2D" type="Sprite2D" parent="TentacleMonster4"]
+texture = ExtResource("3_ffdst")
+
+[node name="TentacleMonster3" type="CharacterBody2D" parent="."]
+modulate = Color(1.44392e-06, 0.632918, 0.435723, 1)
+z_index = 1
+position = Vector2(264.232, 362.95)
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_4xx25")
+y_velocity_per_tentacle_count = SubResource("Curve_h8isb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleMonster3"]
+shape = SubResource("CircleShape2D_h8isb")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="TentacleMonster3"]
+target_desired_distance = 32.0
+navigation_layers = 3
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 16.0
+neighbor_distance = 16.0
+time_horizon_obstacles = 1.0
+max_speed = 256.0
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0.564706, 1, 1)
+
+[node name="RayCast2D" type="RayCast2D" parent="TentacleMonster3"]
+
+[node name="Sprite2D" type="Sprite2D" parent="TentacleMonster3"]
+texture = ExtResource("3_ffdst")
+
+[node name="TentacleMonster" type="CharacterBody2D" parent="."]
+modulate = Color(1.82897e-06, 0.58778, 0.760238, 1)
+z_index = 1
+position = Vector2(302, -133)
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_4xx25")
+y_velocity_per_tentacle_count = SubResource("Curve_h8isb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleMonster"]
+shape = SubResource("CircleShape2D_h8isb")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="TentacleMonster"]
+target_desired_distance = 32.0
+navigation_layers = 3
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 16.0
+neighbor_distance = 16.0
+time_horizon_obstacles = 1.0
+max_speed = 256.0
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0.564706, 1, 1)
+
+[node name="RayCast2D" type="RayCast2D" parent="TentacleMonster"]
+
+[node name="Sprite2D" type="Sprite2D" parent="TentacleMonster"]
+texture = ExtResource("3_ffdst")
+
+[node name="TentacleMonster2" type="CharacterBody2D" parent="."]
+modulate = Color(0.789082, 0.0867754, 1, 1)
+z_index = 1
+position = Vector2(657, 217)
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_4xx25")
+y_velocity_per_tentacle_count = SubResource("Curve_h8isb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleMonster2"]
+shape = SubResource("CircleShape2D_h8isb")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="TentacleMonster2"]
+target_desired_distance = 32.0
+navigation_layers = 3
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 16.0
+neighbor_distance = 16.0
+time_horizon_obstacles = 1.0
+max_speed = 256.0
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0.564706, 1, 1)
+
+[node name="RayCast2D" type="RayCast2D" parent="TentacleMonster2"]
+
+[node name="Sprite2D" type="Sprite2D" parent="TentacleMonster2"]
+texture = ExtResource("3_ffdst")
+
+[node name="FpsLabel" type="RichTextLabel" parent="."]
+offset_left = -502.0
+offset_top = -295.0
+offset_right = -462.0
+offset_bottom = -255.0
+script = ExtResource("2_4xx25")

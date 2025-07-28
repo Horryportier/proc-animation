@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://d24i21g4kr5he"]
+
+[ext_resource type="Script" uid="uid://do1ugnoxal4ax" path="res://scenes/test/fabirk_constrained.gd" id="1_vy5h8"]
+[ext_resource type="Texture2D" uid="uid://c3ymex414esuh" path="res://assets/tentacle.png" id="2_lwhrl"]
+
+[sub_resource type="Curve" id="Curve_4xx25"]
+_data = [Vector2(0, 0.808508), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.683232), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="FabirkConstrained" type="Node2D"]
+script = ExtResource("1_vy5h8")
+min_distance_error = 16.0
+segments_count = 5
+segments_lenght = 25.0
+segments_angle = 180.0
+target_center_offset = 400.0
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+texture_repeat = 2
+width = 16.0
+width_curve = SubResource("Curve_4xx25")
+texture = ExtResource("2_lwhrl")
+texture_mode = 2
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
