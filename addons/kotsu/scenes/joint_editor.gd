@@ -15,8 +15,8 @@ var current: int
 
 func _ready() -> void:
 	angle_offset.value_changed.connect(_on_angle_offset_value_changed)
-	min_angle_line_edit.text_submited.connect(_on_min_angle_line_edit_text_changed)
-	max_angle_line_edit.text_submited.connect(_on_max_angle_line_edit_text_changed)
+	min_angle_line_edit.text_submitted.connect(_on_min_angle_line_edit_text_changed)
+	max_angle_line_edit.text_submitted.connect(_on_max_angle_line_edit_text_changed)
 
 func setup(armeture: Armature) -> void:
 	_armeture = armeture
@@ -61,6 +61,7 @@ func _on_min_angle_line_edit_text_changed(new_text: String) -> void:
 		min_angle_line_edit.text = str(rad_to_deg(constrains[_armeture.LIMB_MIN]))
 		return
 	constrains[_armeture.LIMB_MIN] = deg_to_rad(float(min_angle_line_edit.text))
+	print(constrains[_armeture.LIMB_MIN])
 	update_visualizer()
 
 func _on_max_angle_line_edit_text_changed(new_text: String) -> void:

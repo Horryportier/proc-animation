@@ -2,11 +2,21 @@
 class_name Armature
 extends Node2D
 
+const KOTSU_IK_TAG: = "kotsu_ik"
+
+
 enum {
 	LIMB_LEN,
 	LIMB_MIN,
 	LIMB_MAX,
 	LIMB_ANGLE_OFFSET,
+}
+
+# TODO: partiar rebuilding rebuilding 
+enum RebuildType {
+	All,
+	BoneHierachy,
+	Constrains,
 }
 
 @export_group("setup")
@@ -76,6 +86,10 @@ func _build_hierachy() -> void:
 				indexes.append(child_idx)
 				bone_hierachy[idx]["parent"] = idx
 		bone_hierachy[idx]["children"] = indexes
+		var parent: = bone_hierachy[idx].get("parent", -1)
+		var parent_is_ik: bool = bone_hierachy.get(parent, {}).get("is_IK", false)
+		if node.is_in_group(KOTSU_IK_TAG) or parent_is_ik:
+			bone_hierachy[idx]["is_IK"] = true
 
 func _populate_constrains(idx: int, node: Node2D) -> void:
 	constrains[idx] = [node.position.distance_to(Vector2.ZERO), -deg_to_rad(180), deg_to_rad(180), 0]

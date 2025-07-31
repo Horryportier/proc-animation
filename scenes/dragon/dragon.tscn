@@ -162,10 +162,10 @@ bone_hierachy = Dictionary[int, Dictionary]({
 }
 })
 constrains = Dictionary[int, Array]({
-0: [0.0, 1.5708, 0.0, -1.5708],
-1: [8.544, -3.14159, 3.14159, 0.0],
-2: [7.2111, -3.14159, 3.14159, 2.61799],
-3: [0.0, -3.14159, 3.14159, 0.0],
+0: [0.0, 0.0, 0.0, -0.0174533],
+1: [8.544, -0.523599, 0.523599, -0.383972],
+2: [7.2111, -0.785398, 0.785398, -0.610865],
+3: [0.0, 0.0, 0.0, 0.0],
 4: [12.1655, -3.14159, 3.14159, 0],
 5: [12.0416, -3.14159, 3.14159, 0],
 6: [9.84886, -3.14159, 3.14159, 0],
@@ -190,8 +190,8 @@ constrains = Dictionary[int, Array]({
 })
 debug_draw = true
 selected = 2
-selected_color_angle = null
-unselected_color_angle = null
+selected_color_angle = Color(1, 0.1913, 0.581419, 0.709804)
+unselected_color_angle = Color(0, 0.599192, 0.645837, 0.188235)
 metadata/_custom_type_script = "uid://cmmyp6yb7p2f1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -234,7 +234,7 @@ position = Vector2(4.83152, -11.0298)
 texture = ExtResource("11_855dp")
 offset = Vector2(6, -2)
 
-[node name="LegFrontFront" type="Node2D" parent="Visual/DragonBelly/DragonTorso"]
+[node name="LegFrontFront" type="Node2D" parent="Visual/DragonBelly/DragonTorso" groups=["kotsu_ik"]]
 position = Vector2(13, 9)
 
 [node name="DragonFrontThight" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso/LegFrontFront"]
@@ -251,7 +251,7 @@ position = Vector2(6, 9)
 texture = ExtResource("13_jasqd")
 offset = Vector2(3, 1)
 
-[node name="LegFrontBack" type="Node2D" parent="Visual/DragonBelly/DragonTorso"]
+[node name="LegFrontBack" type="Node2D" parent="Visual/DragonBelly/DragonTorso" groups=["kotsu_ik"]]
 modulate = Color(0.511558, 0.511558, 0.511558, 1)
 z_index = -1
 position = Vector2(17, 9)
@@ -293,7 +293,7 @@ rotation = 0.18326
 texture = ExtResource("3_8ql4m")
 offset = Vector2(-8, 4)
 
-[node name="LegBackFront" type="Node2D" parent="Visual/DragonBelly/DragonHips"]
+[node name="LegBackFront" type="Node2D" parent="Visual/DragonBelly/DragonHips" groups=["kotsu_ik"]]
 position = Vector2(-9, 4)
 
 [node name="DragonBackThigh" type="Sprite2D" parent="Visual/DragonBelly/DragonHips/LegBackFront"]
@@ -310,7 +310,7 @@ position = Vector2(-9, 8)
 texture = ExtResource("6_0uu3o")
 offset = Vector2(3.5, 3.5)
 
-[node name="LegBackBack" type="Node2D" parent="Visual/DragonBelly/DragonHips"]
+[node name="LegBackBack" type="Node2D" parent="Visual/DragonBelly/DragonHips" groups=["kotsu_ik"]]
 modulate = Color(0.600561, 0.600561, 0.600561, 1)
 z_index = -1
 position = Vector2(-6, 4)
