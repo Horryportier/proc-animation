@@ -29,12 +29,14 @@ movie_writer/movie_file="/home/horry/Personal/proc-animation/video/tentacles.avi
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ldtk-importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/kotsu/plugin.cfg", "res://addons/ldtk-importer/plugin.cfg", "res://addons/soupik/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://addons/": "red",
+"res://addons/kotsu/scenes/": "green",
+"res://addons/kotsu/scripts/": "yellow",
 "res://assets/": "purple",
 "res://scenes/": "green",
 "res://scripts/": "yellow"

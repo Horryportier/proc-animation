@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var raycast: RayCast2D = $RayCast2D
 
-var tentacle_count: int = 4
+var tentacle_count: int = 8
 
 
 var disable_grabing_force: bool
@@ -30,10 +30,9 @@ var statinary_time: float
 
 func _ready() -> void:
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
-	tentacle_count = randi_range(2, 5)
 	for i in tentacle_count:
 		var tentacle: Node2D = tentacle_scene.instantiate()
-		tentacle.position = rand_vec(16)
+		tentacle.position = Vector2.LEFT.rotated(i * (360 / tentacle_count)) * 8
 		tentacles.append(tentacle)
 		add_child(tentacle)
 		tentacle.line2D.modulate = modulate
@@ -51,6 +50,7 @@ func _physics_process(_delta: float) -> void:
 		var raw_target: = get_global_mouse_position() + ((Vector2(randf(), randf()) * 2  -Vector2.ONE) * 64)
 		_change_target(raw_target)
 	connected =  tentacles.map(func (f: Node2D) -> bool: return f.is_at_target()).filter(func (f: bool) -> bool: return f).size()
+	print()
 	if NavigationServer2D.map_get_iteration_id(navigation_agent.get_navigation_map()) == 0:
 		return
 	if navigation_agent.is_navigation_finished():
@@ -61,17 +61,7 @@ func _physics_process(_delta: float) -> void:
 		navigation_agent.set_velocity(new_velocity)
 	else:
 		_on_velocity_computed(new_velocity)
-	for tentacle in tentacles:
-		if tentacle.is_at_target():
-			continue
-		raycast.target_position = Vector2.LEFT.rotated(deg_to_rad(randf_range(0 ,360))) * (tentacle.segments_count * tentacle.segments_lenght)
-		#raycast.force_update_transform()
-		for i in 360 / 30:
-			if raycast.is_colliding():
-				tentacle.update_target(raycast.get_collision_point())
-				continue
-			raycast.target_position = raycast.target_position.rotated(45)
-
+	
 func _draw() -> void:
 	return
 	draw_set_transform_matrix(global_transform.affine_inverse())
@@ -84,23 +74,29 @@ func set_movement_target(movement_target: Vector2):
 	navigation_agent.set_target_position(movement_target)
 
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
-	if velocity.abs() < min_statinary_velocity:
-		statinary_time += get_process_delta_time()
-	else: 
-		statinary_time = 0
-	if statinary_time >= max_statinary_time:
-		raycast.target_position =  global_position.direction_to(target) * (tentacles[0].segments_count * tentacles[0].segments_lenght)
-		if !raycast.is_colliding() and !navigation_agent.is_target_reached() and !disable_grabing_force:
-			disable_grabing_force = true
-			get_tree().create_timer(3).timeout.connect(func () -> void: disable_grabing_force = false)
-			
-		#_change_target(target + rand_vec(64))
+#	if velocity.abs() < min_statinary_velocity:
+#		statinary_time += get_process_delta_time()
+#	else: 
+#		statinary_time = 0
+#	if statinary_time >= max_statinary_time:
+#		raycast.target_position =  global_position.direction_to(target) * (tentacles[0].segments_count * tentacles[0].segments_lenght)
+#		if !raycast.is_colliding() and !navigation_agent.is_target_reached() and !disable_grabing_force:
+#			disable_grabing_force = true
+#			get_tree().create_timer(3).timeout.connect(func () -> void: disable_grabing_force = false)
+#			
+#		#_change_target(target + rand_vec(64))
 		
 	velocity = safe_velocity 
-	var gravity_influance: float = y_velocity_per_tentacle_count.sample(remap(connected , 0, tentacle_count, 0, 1)) if !disable_grabing_force else 1
-	velocity.y += clampf((get_gravity() * gravity_influance).y, 0, INF)
+	var gravity_influance: float =clampf( y_velocity_per_tentacle_count.sample(remap(connected , 0, tentacle_count, 0, 1)), 0, 1)
+	velocity.y += (get_gravity() * gravity_influance).y 
+	print(velocity)
 	
 	move_and_slide()
 
 func rand_vec(radious: float) -> Vector2:
 	return ((Vector2(randf(), randf()) * 2  -Vector2.ONE) * radious)
+
+func get_tentacle_target(target_pos: Vector2) -> Array:
+	raycast.target_position = target_pos
+	raycast.force_update_transform()
+	return [raycast.get_collision_point(), raycast.is_colliding()]

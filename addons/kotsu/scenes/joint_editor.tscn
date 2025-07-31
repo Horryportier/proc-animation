@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://mdw8wf38bojf"]
+
+[ext_resource type="Texture2D" uid="uid://dkkg6yvt6xd87" path="res://addons/assets/angle_guide_guide_000.png" id="1_apy10"]
+[ext_resource type="Script" uid="uid://pd8bfcvmf31k" path="res://addons/kotsu/scenes/joint_editor.gd" id="1_rp2gh"]
+[ext_resource type="Texture2D" uid="uid://b6my1qt8ksmlc" path="res://addons/assets/angle_guide_progress_000.png" id="2_rp2gh"]
+
+[node name="KotsuJointEdtior" type="MarginContainer"]
+script = ExtResource("1_rp2gh")
+
+[node name="Constrains" type="VSplitContainer" parent="."]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Constrains"]
+layout_mode = 2
+
+[node name="AngleVisualizer" type="TextureProgressBar" parent="Constrains/HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Constrains Angle Visualzer 
+shows angle that joint can be moved in with offset (offset is only visual)"
+max_value = 360.0
+value = 360.0
+fill_mode = 4
+radial_initial_angle = 90.0
+texture_under = ExtResource("1_apy10")
+texture_progress = ExtResource("2_rp2gh")
+texture_progress_offset = Vector2(19, 12)
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Constrains/HSplitContainer"]
+layout_mode = 2
+dragger_visibility = 2
+
+[node name="MinAngleLineEdit" type="LineEdit" parent="Constrains/HSplitContainer/VSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "smallest posible angle of constrained joint"
+placeholder_text = "-180"
+alignment = 2
+virtual_keyboard_type = 2
+
+[node name="MaxAngleLineEdit" type="LineEdit" parent="Constrains/HSplitContainer/VSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "largest posible angle of constrained joint"
+placeholder_text = "180"
+alignment = 2
+virtual_keyboard_type = 2
+
+[node name="AngleOffset" type="HSlider" parent="Constrains"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "offset is only visual and used only for debug purposes"
+max_value = 360.0

@@ -1,35 +1,35 @@
+class_name FabirkConstrained
 extends Node2D
 
 # limb storage indexes, self explanatory
 enum {
 	LIMB_LEN,
 	LIMB_MIN,
-	LIMB_MAX
+	LIMB_MAX,
+	LIMB_ANGLE_OFFSET,
 }
 # used to calculate how ik misses the target
-const BIAS = 3
-const ITERATIONS = 32
+const BIAS: int = 3
+const ITERATIONS: int = 32
 
 # self explanatory
-@onready var base_point = global_position
-@onready var line2D: = $Line2D
+@onready var base_point: Vector2:
+	get:
+		return global_position
 # lengths of every limb in px, minimum and maximum angle constraints
-var limbs := [
-	[20, -deg_to_rad(360), deg_to_rad(360)],
-]
+var limbs : Array[Array]= []
 # the points we working with
 
 
 var joints := PackedVector2Array()
 
 # just to not call limbs.size() every time
-var limbs_size := 0
+var limbs_size : int= 0
 # used to calculate target overshoot from possible range
-var limbs_len := 0
+var limbs_len :  = 0
 
 # amount of lerp from old joints to new, 1.0 disables lerp completely
-var lerp_amount := 0.01
-
+@export var lerp_amount : float = 0.01
 
 @export var min_distance_error: float = 64
 @export var draw_debug: bool
@@ -38,22 +38,28 @@ var lerp_amount := 0.01
 @export var segments_angle: float
 @export var target_center_offset: float
 
-var _target: Vector2
-var _intermidiet_target: Vector2
+@export var _target: Vector2
 
-
-
-var _dir_from_center: Vector2
 # new general update function introduced to handle lerping and
 # case, when target is too close to base point for constrained ik
 func update(target: Vector2) -> void:
 	# storing old joints before calculating new ones
+	
+	# if lerp is not 1.0 (which is the same as not doing anything) -
+	# lerp between old and new joints
+	var new_joints =_update(target ,joints, limbs,  base_point, limbs_len, limbs_size)
+	if lerp_amount != 1.0:
+		for i in range(limbs_size + 1):
+			joints[i] = joints[i].lerp(new_joints[i], lerp_amount)
+
+@warning_ignore("shadowed_variable")
+func _update(target: Vector2,joints: PackedVector2Array, limbs: Array,  base_point: Vector2, limbs_len: float, limbs_size: float) -> PackedVector2Array: 
 	var joints_p := joints.duplicate()
 	# updating ik, and getting squared (faster to calculate)
 	# distance between last joint and target
-	var dist := update_ik(target)
+	var dist := _update_ik(target,joints, limbs, base_point, limbs_len , limbs_size)
 	if dist < min_distance_error:
-		return
+		return joints
 	# check if we out of target - that happens when ik is constrained
 	# and target is too close to the base_point
 	# since we receiving distance squared - comparing with BIAS squared
@@ -64,19 +70,15 @@ func update(target: Vector2) -> void:
 		# but pulled out to distance to last joint, so it's
 		# possible to reach, and it is possibly close to desired target
 		@warning_ignore("return_value_discarded")
-		update_ik(
+		_update_ik(
 			base_point + (target - base_point).normalized() *
-			(base_point.distance_to(joints[limbs_size]))
+			(base_point.distance_to(joints[limbs_size])),
+			joints, limbs, base_point, limbs_len , limbs_size
 		)
-		return
-		
-	# if lerp is not 1.0 (which is the same as not doing anything) -
-	# lerp between old and new joints
-	if lerp_amount != 1.0:
-		for i in range(limbs_size + 1):
-			joints[i] = joints_p[i].lerp(joints[i], lerp_amount)
+	return joints
 
-func update_ik(target: Vector2) -> float:
+@warning_ignore("shadowed_variable")
+static func _update_ik(target: Vector2,joints: PackedVector2Array, limbs: Array,  base_point: Vector2, limbs_len: float, limbs_size: float) -> float:
 	# distance between last joint and target storage,
 	# first init used for calculation of target overshoot from possible range
 	var dist := base_point.distance_squared_to(target)
@@ -84,16 +86,16 @@ func update_ik(target: Vector2) -> float:
 	
 	# if target is far from range we can use only one iteration
 	if dist > limbs_len * limbs_len:
-		_backward_pass(target)
-		_forward_pass()
+		_backward_pass(target,joints, limbs, base_point, limbs_size)
+		_forward_pass(joints, limbs, base_point, limbs_size)
 		return 0.0
 	
 	# minimal distance between last joint and target storage
 	var min_dist := INF
 	var min_joints: PackedVector2Array
 	while iterations < ITERATIONS:
-		_backward_pass(target)
-		_forward_pass()
+		_backward_pass(target,joints, limbs, base_point,  limbs_size)
+		_forward_pass(joints, limbs, base_point,  limbs_size)
 		iterations += 1
 		# distance between last joint and target
 		dist = joints[limbs_size].distance_squared_to(target)
@@ -115,7 +117,8 @@ func update_ik(target: Vector2) -> float:
 	
 	return joints[limbs_size].distance_squared_to(target)
 
-func _forward_pass() -> void:
+@warning_ignore("shadowed_variable")
+static func _forward_pass(joints: PackedVector2Array, limbs: Array, base_point: Vector2, limbs_size: float) -> void:
 	# define root_angle var outside the loop, since we can
 	# don't calculate it and just set it at the end of iteration
 	# to the angle
@@ -146,7 +149,8 @@ func _forward_pass() -> void:
 		# set the root angle for the next iteration
 		root_angle = angle
 
-func _backward_pass(target: Vector2) -> void:
+@warning_ignore("shadowed_variable")
+static func _backward_pass(target: Vector2, joints: PackedVector2Array, limbs: Array,  base_point: Vector2, limbs_size: float) -> void:
 	# force setting last point to the target point,
 	# so we can go backwards to base_point approx
 	# note that joints size is limbs size + 1
@@ -164,6 +168,7 @@ func _backward_pass(target: Vector2) -> void:
 		# it needed for root_angle calculation from the back
 		var c : Vector2= joints[i - 2] if i > 1 else base_point
 		var root_angle := c.angle_to_point(b)
+
 		# calculating difference between current pair of points
 		# by subtracting the base angle of... next pair, since we are
 		# going backwards
@@ -181,8 +186,6 @@ func _backward_pass(target: Vector2) -> void:
 		joints[i - 1] = a + Vector2(limb[LIMB_LEN], 0).rotated(angle + PI)
 
 func _ready():
-	for i in segments_count:
-		limbs.append([segments_lenght, -deg_to_rad(segments_angle), deg_to_rad(segments_angle)])
 	limbs_size = limbs.size()
 	@warning_ignore("return_value_discarded")
 	# joints size is limbs size + 1
@@ -193,36 +196,19 @@ func _ready():
 	for i in range(limbs_size):
 		limbs_len += limbs[i][LIMB_LEN]
 		joints[i + 1] = joints[i] + Vector2(limbs[i][LIMB_LEN], 0)
-	_dir_from_center = Vector2.ZERO.direction_to(global_position)
 	queue_redraw()
-
-
-func _process(_delta: float) -> void:
-	line2D.points = joints
 
 func _physics_process(_delta: float) -> void:
+	_target = get_global_mouse_position()
+	update(_target)
+	if draw_debug:
+		queue_redraw()
 
-	base_point = global_position
-	update(_intermidiet_target)
-	queue_redraw()
-
-
-func _remap_to_global(points: PackedVector2Array) -> PackedVector2Array: 
-	var p: PackedVector2Array
-	for point in points:
-		p.push_back(point)
-	return p
-
-func update_target(pos: Vector2) -> void:
-	var map:=  get_world_2d().navigation_map
-	var closest: = NavigationServer2D.map_get_closest_point(map, pos)
-	_target = closest
-	create_tween().tween_property(self, "_intermidiet_target", _target, 2.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
 
 func _draw():
-	draw_set_transform_matrix(global_transform.affine_inverse())
 	if !draw_debug:
 		return
+	draw_set_transform_matrix(global_transform.affine_inverse())
 	for i in range(limbs_size + 1):
 		if i > 0:
 			draw_line(joints[i - 1], joints[i], Color.WEB_GRAY, 1)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://3nukjxytm5k4" path="res://scenes/dragon/dragon.gd" id="1_4sjrj"]
 [ext_resource type="Texture2D" uid="uid://ce6chqcpx0kbe" path="res://assets/dragon_Tail1_000.png" id="1_ut8cy"]
 [ext_resource type="Texture2D" uid="uid://dcnkerhmuk8bx" path="res://assets/dragon_Tail2_000.png" id="2_4sjrj"]
-[ext_resource type="Script" uid="uid://cmmyp6yb7p2f1" path="res://scripts/armeture.gd" id="3_0gvji"]
+[ext_resource type="Script" uid="uid://cmmyp6yb7p2f1" path="res://addons/kotsu/scripts/armeture.gd" id="3_0gvji"]
 [ext_resource type="Texture2D" uid="uid://dku7ypd01rw32" path="res://assets/dragon_Tail3_000.png" id="3_8ql4m"]
 [ext_resource type="Texture2D" uid="uid://5je1wxxbew0x" path="res://assets/dragon_Hips_000.png" id="4_0gvji"]
 [ext_resource type="Texture2D" uid="uid://qc180itck56x" path="res://assets/dragon_BackThigh_000.png" id="5_esirm"]
@@ -33,7 +33,7 @@ max_angle = 90.0
 set_angle = 0.451
 
 [node name="Armature" type="Node2D" parent="." node_paths=PackedStringArray("agent", "root_bone_node", "node_references")]
-z_index = 2
+z_index = 1
 script = ExtResource("3_0gvji")
 agent = NodePath("..")
 root_bone_node = NodePath("../Visual/DragonBelly")
@@ -67,86 +67,135 @@ node_references = {
 joints = Array[Vector2]([Vector2(0, 0), Vector2(-8, 3), Vector2(-14, 7), Vector2(-14, 7), Vector2(-16, 19), Vector2(-25, 27), Vector2(-17, 7), Vector2(-17, 7), Vector2(-19, 19), Vector2(-28, 27), Vector2(-20, 4), Vector2(-33, 12), Vector2(-44.7425, 20.007), Vector2(9, 4), Vector2(26, 13), Vector2(26, 13), Vector2(23, 25), Vector2(29, 34), Vector2(22, 13), Vector2(22, 13), Vector2(19, 25), Vector2(25, 34), Vector2(28, 12), Vector2(35, 8), Vector2(39.8315, -3.0298)])
 bone_hierachy = Dictionary[int, Dictionary]({
 0: {
-"children": Array[int]([13, 1])
+"children": Array[int]([13, 1]),
+"parent": 0
 },
 1: {
-"children": Array[int]([10, 6, 2])
+"children": Array[int]([10, 6, 2]),
+"parent": 1
 },
 2: {
-"children": Array[int]([3])
+"children": Array[int]([3]),
+"parent": 2
 },
 3: {
-"children": Array[int]([4])
+"children": Array[int]([4]),
+"parent": 3
 },
 4: {
-"children": Array[int]([5])
+"children": Array[int]([5]),
+"parent": 4
 },
 5: {
 "children": Array[int]([])
 },
 6: {
-"children": Array[int]([7])
+"children": Array[int]([7]),
+"parent": 6
 },
 7: {
-"children": Array[int]([8])
+"children": Array[int]([8]),
+"parent": 7
 },
 8: {
-"children": Array[int]([9])
+"children": Array[int]([9]),
+"parent": 8
 },
 9: {
 "children": Array[int]([])
 },
 10: {
-"children": Array[int]([11])
+"children": Array[int]([11]),
+"parent": 10
 },
 11: {
-"children": Array[int]([12])
+"children": Array[int]([12]),
+"parent": 11
 },
 12: {
 "children": Array[int]([])
 },
 13: {
-"children": Array[int]([22, 18, 14])
+"children": Array[int]([22, 18, 14]),
+"parent": 13
 },
 14: {
-"children": Array[int]([15])
+"children": Array[int]([15]),
+"parent": 14
 },
 15: {
-"children": Array[int]([16])
+"children": Array[int]([16]),
+"parent": 15
 },
 16: {
-"children": Array[int]([17])
+"children": Array[int]([17]),
+"parent": 16
 },
 17: {
 "children": Array[int]([])
 },
 18: {
-"children": Array[int]([19])
+"children": Array[int]([19]),
+"parent": 18
 },
 19: {
-"children": Array[int]([20])
+"children": Array[int]([20]),
+"parent": 19
 },
 20: {
-"children": Array[int]([21])
+"children": Array[int]([21]),
+"parent": 20
 },
 21: {
 "children": Array[int]([])
 },
 22: {
-"children": Array[int]([23])
+"children": Array[int]([23]),
+"parent": 22
 },
 23: {
-"children": Array[int]([24])
+"children": Array[int]([24]),
+"parent": 23
 },
 24: {
 "children": Array[int]([])
 }
 })
+constrains = Dictionary[int, Array]({
+0: [0.0, 1.5708, 0.0, -1.5708],
+1: [8.544, -3.14159, 3.14159, 0.0],
+2: [7.2111, -3.14159, 3.14159, 2.61799],
+3: [0.0, -3.14159, 3.14159, 0.0],
+4: [12.1655, -3.14159, 3.14159, 0],
+5: [12.0416, -3.14159, 3.14159, 0],
+6: [9.84886, -3.14159, 3.14159, 0],
+7: [0.0, -3.14159, 3.14159, 0],
+8: [12.1655, -3.14159, 3.14159, 0.0],
+9: [12.0416, -3.14159, 3.14159, 0],
+10: [12.0416, -3.14159, 3.14159, 0],
+11: [15.2643, -3.14159, 3.14159, 0],
+12: [14.2127, -3.14159, 3.14159, 0.680678],
+13: [9.84886, -3.14159, 3.14159, 0],
+14: [19.2354, -3.14159, 3.14159, 0],
+15: [0.0, -3.14159, 3.14159, 0],
+16: [12.3693, -3.14159, 3.14159, 0],
+17: [10.8167, -3.14159, 3.14159, 0],
+18: [15.8114, -3.14159, 3.14159, 0],
+19: [0.0, -3.14159, 3.14159, 0],
+20: [12.3693, -3.14159, 3.14159, 0],
+21: [10.8167, -3.14159, 3.14159, 0],
+22: [20.6155, -3.14159, 3.14159, 0],
+23: [8.06226, -3.14159, 3.14159, 0.0],
+24: [12.0416, -3.14159, 3.14159, 0.0]
+})
 debug_draw = true
+selected = 2
+selected_color_angle = null
+unselected_color_angle = null
 metadata/_custom_type_script = "uid://cmmyp6yb7p2f1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(0, 4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ut8cy")
 
@@ -154,11 +203,10 @@ shape = SubResource("CapsuleShape2D_ut8cy")
 visible = false
 modulate = Color(0.993814, 0.609168, 0.686732, 0.564706)
 z_index = 1
-position = Vector2(-9, 7)
+position = Vector2(-8, 9)
 texture = ExtResource("16_qhnyx")
 
 [node name="Visual" type="CanvasGroup" parent="."]
-z_index = -2
 fit_margin = 1024.0
 clear_margin = 461.0
 
