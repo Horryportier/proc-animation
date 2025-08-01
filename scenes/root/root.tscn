@@ -1,118 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://cb361824djqpk"]
+[gd_scene load_steps=3 format=3 uid="uid://cb361824djqpk"]
 
 [ext_resource type="PackedScene" uid="uid://ckpv4jv12w8im" path="res://scenes/levels/level.ldtk" id="1_2yu1p"]
 [ext_resource type="PackedScene" uid="uid://0iu2yfsjuto4" path="res://scenes/dragon/dragon.tscn" id="2_f1tf0"]
-[ext_resource type="Script" uid="uid://ns7kgy7mu5nr" path="res://bone_restriction.gd" id="3_cj6gr"]
-
-[sub_resource type="Resource" id="Resource_cj6gr"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_3sdhb"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_rskmp"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_hrtr2"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_7ak8l"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_swrb0"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_q31ox"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_gxd77"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_3nfyn"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_7ba2d"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_sq6te"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_5fhal"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_m7xoi"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_1llk7"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_xwccc"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_k5b7n"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_07jma"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_aigco"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_sk5tv"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_j84mw"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_87dwh"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
-
-[sub_resource type="Resource" id="Resource_a1qps"]
-script = ExtResource("3_cj6gr")
-max_angle = 90.0
-offset = 0.0
 
 [node name="Root" type="Node"]
 
@@ -120,34 +9,8 @@ offset = 0.0
 
 [node name="level" parent="World" instance=ExtResource("1_2yu1p")]
 
-[node name="Dragon" parent="World" node_paths=PackedStringArray("bone_restrictions") instance=ExtResource("2_f1tf0")]
+[node name="Dragon" parent="World" instance=ExtResource("2_f1tf0")]
 z_index = 10
-position = Vector2(-139, 731)
-bone_restrictions = {
-NodePath("Visual/DragonBelly/DragonHips/DragonTail1/DragonTail2/DragonTail3"): SubResource("Resource_87dwh"),
-NodePath("Visual/DragonBelly/DragonHips/DragonTail1/DragonTail2"): SubResource("Resource_j84mw"),
-NodePath("Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin/DragonBackFoot"): SubResource("Resource_sk5tv"),
-NodePath("Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin"): SubResource("Resource_aigco"),
-NodePath("Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh"): SubResource("Resource_07jma"),
-NodePath("Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh/DragonBackShin/DragonBackFoot"): SubResource("Resource_k5b7n"),
-NodePath("Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh/DragonBackShin"): SubResource("Resource_xwccc"),
-NodePath("Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh"): SubResource("Resource_1llk7"),
-NodePath("Visual/DragonBelly/DragonHips/DragonTail1"): SubResource("Resource_m7xoi"),
-NodePath("Visual/DragonBelly/DragonTorso/DragonLowerNeck/DragonUpperNeck/DragonHead"): SubResource("Resource_5fhal"),
-NodePath("Visual/DragonBelly/DragonTorso/DragonLowerNeck/DragonUpperNeck"): SubResource("Resource_sq6te"),
-NodePath("Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight/DragonFrontShin/DragonFrontFoot"): SubResource("Resource_7ba2d"),
-NodePath("Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight/DragonFrontShin"): SubResource("Resource_3nfyn"),
-NodePath("Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight"): SubResource("Resource_gxd77"),
-NodePath("Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight/DragonFrontShin/DragonFrontFoot"): SubResource("Resource_q31ox"),
-NodePath("Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight/DragonFrontShin"): SubResource("Resource_swrb0"),
-NodePath("Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight"): SubResource("Resource_7ak8l"),
-NodePath("Visual/DragonBelly/DragonTorso/DragonLowerNeck"): SubResource("Resource_hrtr2"),
-NodePath("Visual/DragonBelly/DragonTorso"): SubResource("Resource_rskmp"),
-NodePath("Visual/DragonBelly/DragonHips"): SubResource("Resource_3sdhb"),
-NodePath("Visual/DragonBelly"): SubResource("Resource_cj6gr"),
-null: SubResource("Resource_a1qps")
-}
-set_angle = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="World/Dragon"]
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)

@@ -47,20 +47,18 @@ func update(target: Vector2) -> void:
 	
 	# if lerp is not 1.0 (which is the same as not doing anything) -
 	# lerp between old and new joints
-	var new_joints =_update(target ,joints, limbs,  base_point, limbs_len, limbs_size)
+	var new_joints = _update(target ,joints, limbs,  base_point, limbs_len, limbs_size)
 	if lerp_amount != 1.0:
 		for i in range(limbs_size + 1):
 			joints[i] = joints[i].lerp(new_joints[i], lerp_amount)
 
 @warning_ignore("shadowed_variable")
-func _update(target: Vector2,joints: PackedVector2Array, limbs: Array,  base_point: Vector2, limbs_len: float, limbs_size: float) -> PackedVector2Array: 
+static func _update(target: Vector2,joints: PackedVector2Array, limbs: Array,  base_point: Vector2, limbs_len: float, limbs_size: int) -> PackedVector2Array: 
 	var joints_p := joints.duplicate()
 	# updating ik, and getting squared (faster to calculate)
 	# distance between last joint and target
 	var dist := _update_ik(target,joints, limbs, base_point, limbs_len , limbs_size)
-	if dist < min_distance_error:
-		return joints
-	# check if we out of target - that happens when ik is constrained
+		# check if we out of target - that happens when ik is constrained
 	# and target is too close to the base_point
 	# since we receiving distance squared - comparing with BIAS squared
 	if dist > BIAS * BIAS:
@@ -78,7 +76,7 @@ func _update(target: Vector2,joints: PackedVector2Array, limbs: Array,  base_poi
 	return joints
 
 @warning_ignore("shadowed_variable")
-static func _update_ik(target: Vector2,joints: PackedVector2Array, limbs: Array,  base_point: Vector2, limbs_len: float, limbs_size: float) -> float:
+static func _update_ik(target: Vector2,joints: PackedVector2Array, limbs: Array,  base_point: Vector2, limbs_len: float, limbs_size: int) -> float:
 	# distance between last joint and target storage,
 	# first init used for calculation of target overshoot from possible range
 	var dist := base_point.distance_squared_to(target)

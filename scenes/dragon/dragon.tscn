@@ -23,16 +23,12 @@
 radius = 7.0
 height = 42.0
 
-[node name="Dragon" type="CharacterBody2D" node_paths=PackedStringArray("selected_node")]
+[node name="Dragon" type="CharacterBody2D"]
 z_index = -2
 collision_layer = 4
 script = ExtResource("1_4sjrj")
-angle_color = Color(0, 0.660058, 0.442215, 0.513726)
-selected_node = NodePath("Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin")
-max_angle = 90.0
-set_angle = 0.451
 
-[node name="Armature" type="Node2D" parent="." node_paths=PackedStringArray("agent", "root_bone_node", "node_references")]
+[node name="Armature" type="Node2D" parent="." node_paths=PackedStringArray("agent", "root_bone_node", "node_references", "ik_chains")]
 z_index = 1
 script = ExtResource("3_0gvji")
 agent = NodePath("..")
@@ -44,152 +40,226 @@ node_references = {
 3: NodePath("../Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh"),
 4: NodePath("../Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh/DragonBackShin"),
 5: NodePath("../Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh/DragonBackShin/DragonBackFoot"),
-6: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront"),
-7: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh"),
-8: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin"),
-9: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin/DragonBackFoot"),
-10: NodePath("../Visual/DragonBelly/DragonHips/DragonTail1"),
-11: NodePath("../Visual/DragonBelly/DragonHips/DragonTail1/DragonTail2"),
-12: NodePath("../Visual/DragonBelly/DragonHips/DragonTail1/DragonTail2/DragonTail3"),
-13: NodePath("../Visual/DragonBelly/DragonTorso"),
-14: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack"),
-15: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight"),
-16: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight/DragonFrontShin"),
-17: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight/DragonFrontShin/DragonFrontFoot"),
-18: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront"),
-19: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight"),
-20: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight/DragonFrontShin"),
-21: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight/DragonFrontShin/DragonFrontFoot"),
-22: NodePath("../Visual/DragonBelly/DragonTorso/DragonLowerNeck"),
-23: NodePath("../Visual/DragonBelly/DragonTorso/DragonLowerNeck/DragonUpperNeck"),
-24: NodePath("../Visual/DragonBelly/DragonTorso/DragonLowerNeck/DragonUpperNeck/DragonHead")
+6: NodePath("../Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh/DragonBackShin/DragonBackFoot/BackFootEnd"),
+7: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront"),
+8: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh"),
+9: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin"),
+10: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin/DragonBackFoot"),
+11: NodePath("../Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin/DragonBackFoot/BackFootEnd"),
+12: NodePath("../Visual/DragonBelly/DragonHips/DragonTail1"),
+13: NodePath("../Visual/DragonBelly/DragonHips/DragonTail1/DragonTail2"),
+14: NodePath("../Visual/DragonBelly/DragonHips/DragonTail1/DragonTail2/DragonTail3"),
+15: NodePath("../Visual/DragonBelly/DragonTorso"),
+16: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack"),
+17: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight"),
+18: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight/DragonFrontShin"),
+19: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack/DragonFrontThight/DragonFrontShin/DragonFrontFoot"),
+20: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront"),
+21: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight"),
+22: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight/DragonFrontShin"),
+23: NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront/DragonFrontThight/DragonFrontShin/DragonFrontFoot"),
+24: NodePath("../Visual/DragonBelly/DragonTorso/DragonLowerNeck"),
+25: NodePath("../Visual/DragonBelly/DragonTorso/DragonLowerNeck/DragonUpperNeck"),
+26: NodePath("../Visual/DragonBelly/DragonTorso/DragonLowerNeck/DragonUpperNeck/DragonHead")
 }
-joints = Array[Vector2]([Vector2(0, 0), Vector2(-8, 3), Vector2(-14, 7), Vector2(-14, 7), Vector2(-16, 19), Vector2(-25, 27), Vector2(-17, 7), Vector2(-17, 7), Vector2(-19, 19), Vector2(-28, 27), Vector2(-20, 4), Vector2(-33, 12), Vector2(-44.7425, 20.007), Vector2(9, 4), Vector2(26, 13), Vector2(26, 13), Vector2(23, 25), Vector2(29, 34), Vector2(22, 13), Vector2(22, 13), Vector2(19, 25), Vector2(25, 34), Vector2(28, 12), Vector2(35, 8), Vector2(39.8315, -3.0298)])
+joints = PackedVector2Array(0, 0, -8, 3, -14, 7, -14, 7, -16, 19, -25, 27, -20, 37, -17, 7, -17, 7, -19, 19, -28, 27, -23, 37, -20, 4, -33, 12, -44.7425, 20.007, 9, 4, 26, 13, 26, 13, 23, 25, 29, 34, 22, 13, 22, 13, 19, 25, 25, 34, 28, 12, 35, 8, 39.8315, -3.0298)
+joints_rest_pose = PackedVector2Array(0, 0, -8, 3, -14, 7, -14, 7, -16, 19, -25, 27, -20, 37, -17, 7, -17, 7, -19, 19, -28, 27, -23, 37, -20, 4, -33, 12, -44.7425, 20.007, 9, 4, 26, 13, 26, 13, 23, 25, 29, 34, 22, 13, 22, 13, 19, 25, 25, 34, 28, 12, 35, 8, 39.8315, -3.0298)
 bone_hierachy = Dictionary[int, Dictionary]({
 0: {
-"children": Array[int]([13, 1]),
-"parent": 0
+"children": Array[int]([15, 1])
 },
 1: {
-"children": Array[int]([10, 6, 2]),
-"parent": 1
+"children": Array[int]([12, 7, 2]),
+"parent": 0
 },
 2: {
+"IK_start": true,
 "children": Array[int]([3]),
-"parent": 2
+"is_IK": true,
+"parent": 1
 },
 3: {
 "children": Array[int]([4]),
-"parent": 3
+"is_IK": true,
+"parent": 2
 },
 4: {
 "children": Array[int]([5]),
-"parent": 4
+"is_IK": true,
+"parent": 3
 },
 5: {
-"children": Array[int]([])
+"children": Array[int]([6]),
+"is_IK": true,
+"parent": 4
 },
 6: {
-"children": Array[int]([7]),
-"parent": 6
+"children": Array[int]([]),
+"is_IK": true,
+"parent": 5
 },
 7: {
+"IK_start": true,
 "children": Array[int]([8]),
-"parent": 7
+"is_IK": true,
+"parent": 1
 },
 8: {
 "children": Array[int]([9]),
-"parent": 8
+"is_IK": true,
+"parent": 7
 },
 9: {
-"children": Array[int]([])
+"children": Array[int]([10]),
+"is_IK": true,
+"parent": 8
 },
 10: {
 "children": Array[int]([11]),
-"parent": 10
+"is_IK": true,
+"parent": 9
 },
 11: {
-"children": Array[int]([12]),
-"parent": 11
+"children": Array[int]([]),
+"is_IK": true,
+"parent": 10
 },
 12: {
-"children": Array[int]([])
+"IK_start": true,
+"children": Array[int]([13]),
+"is_IK": true,
+"parent": 1
 },
 13: {
-"children": Array[int]([22, 18, 14]),
-"parent": 13
+"children": Array[int]([14]),
+"is_IK": true,
+"parent": 12
 },
 14: {
-"children": Array[int]([15]),
-"parent": 14
+"children": Array[int]([]),
+"is_IK": true,
+"parent": 13
 },
 15: {
-"children": Array[int]([16]),
-"parent": 15
+"children": Array[int]([24, 20, 16]),
+"parent": 0
 },
 16: {
+"IK_start": true,
 "children": Array[int]([17]),
-"parent": 16
+"is_IK": true,
+"parent": 15
 },
 17: {
-"children": Array[int]([])
+"children": Array[int]([18]),
+"is_IK": true,
+"parent": 16
 },
 18: {
 "children": Array[int]([19]),
-"parent": 18
+"is_IK": true,
+"parent": 17
 },
 19: {
-"children": Array[int]([20]),
-"parent": 19
+"children": Array[int]([]),
+"is_IK": true,
+"parent": 18
 },
 20: {
+"IK_start": true,
 "children": Array[int]([21]),
-"parent": 20
+"is_IK": true,
+"parent": 15
 },
 21: {
-"children": Array[int]([])
+"children": Array[int]([22]),
+"is_IK": true,
+"parent": 20
 },
 22: {
 "children": Array[int]([23]),
-"parent": 22
+"is_IK": true,
+"parent": 21
 },
 23: {
-"children": Array[int]([24]),
-"parent": 23
+"children": Array[int]([]),
+"is_IK": true,
+"parent": 22
 },
 24: {
-"children": Array[int]([])
+"IK_start": true,
+"children": Array[int]([25]),
+"is_IK": true,
+"parent": 15
+},
+25: {
+"children": Array[int]([26]),
+"is_IK": true,
+"parent": 24
+},
+26: {
+"children": Array[int]([]),
+"is_IK": true,
+"parent": 25
 }
 })
 constrains = Dictionary[int, Array]({
-0: [0.0, 0.0, 0.0, -0.0174533],
-1: [8.544, -0.523599, 0.523599, -0.383972],
-2: [7.2111, -0.785398, 0.785398, -0.610865],
-3: [0.0, 0.0, 0.0, 0.0],
+0: [0.0, -3.14159, 3.14159, 0],
+1: [8.544, -3.14159, 3.14159, 0],
+2: [7.2111, -3.14159, 3.14159, 0],
+3: [0.0, -3.14159, 3.14159, 0],
 4: [12.1655, -3.14159, 3.14159, 0],
 5: [12.0416, -3.14159, 3.14159, 0],
-6: [9.84886, -3.14159, 3.14159, 0],
-7: [0.0, -3.14159, 3.14159, 0],
-8: [12.1655, -3.14159, 3.14159, 0.0],
-9: [12.0416, -3.14159, 3.14159, 0],
+6: [11.1803, -3.14159, 3.14159, 0],
+7: [9.84886, -3.14159, 3.14159, 0],
+8: [0.0, -3.14159, 3.14159, 0],
+9: [12.1655, -3.14159, 3.14159, 0],
 10: [12.0416, -3.14159, 3.14159, 0],
-11: [15.2643, -3.14159, 3.14159, 0],
-12: [14.2127, -3.14159, 3.14159, 0.680678],
-13: [9.84886, -3.14159, 3.14159, 0],
-14: [19.2354, -3.14159, 3.14159, 0],
-15: [0.0, -3.14159, 3.14159, 0],
-16: [12.3693, -3.14159, 3.14159, 0],
-17: [10.8167, -3.14159, 3.14159, 0],
-18: [15.8114, -3.14159, 3.14159, 0],
-19: [0.0, -3.14159, 3.14159, 0],
-20: [12.3693, -3.14159, 3.14159, 0],
-21: [10.8167, -3.14159, 3.14159, 0],
-22: [20.6155, -3.14159, 3.14159, 0],
-23: [8.06226, -3.14159, 3.14159, 0.0],
-24: [12.0416, -3.14159, 3.14159, 0.0]
+11: [11.1803, -3.14159, 3.14159, 0],
+12: [12.0416, -3.14159, 3.14159, 0],
+13: [15.2643, -3.14159, 3.14159, 0],
+14: [14.2127, -3.14159, 3.14159, 0],
+15: [9.84886, -3.14159, 3.14159, 0],
+16: [19.2354, -3.14159, 3.14159, 0],
+17: [0.0, -3.14159, 3.14159, 0],
+18: [12.3693, -3.14159, 3.14159, 0],
+19: [10.8167, -3.14159, 3.14159, 0],
+20: [15.8114, -3.14159, 3.14159, 0],
+21: [0.0, -3.14159, 3.14159, 0],
+22: [12.3693, -3.14159, 3.14159, 0],
+23: [10.8167, -3.14159, 3.14159, 0],
+24: [20.6155, -3.14159, 3.14159, 0.0],
+25: [8.06226, -3.14159, 3.14159, 0],
+26: [12.0416, -3.14159, 3.14159, 0]
 })
+ik_chains = {
+NodePath("../Visual/DragonBelly/DragonHips/LegBackBack"): {
+"indexes": Array[int]([3, 4, 5, 6]),
+"lenght": 35.0
+},
+NodePath("../Visual/DragonBelly/DragonHips/LegBackFront"): {
+"indexes": Array[int]([8, 9, 10, 11]),
+"lenght": 35.0
+},
+NodePath("../Visual/DragonBelly/DragonHips/DragonTail1"): {
+"indexes": Array[int]([13, 14]),
+"lenght": 29.0
+},
+NodePath("../Visual/DragonBelly/DragonTorso/LegFrontBack"): {
+"indexes": Array[int]([17, 18, 19]),
+"lenght": 22.0
+},
+NodePath("../Visual/DragonBelly/DragonTorso/LegFrontFront"): {
+"indexes": Array[int]([21, 22, 23]),
+"lenght": 22.0
+},
+NodePath("../Visual/DragonBelly/DragonTorso/DragonLowerNeck"): {
+"indexes": Array[int]([25, 26]),
+"lenght": 20.0
+}
+}
 debug_draw = true
-selected = 2
+selected = 26
 selected_color_angle = Color(1, 0.1913, 0.581419, 0.709804)
 unselected_color_angle = Color(0, 0.599192, 0.645837, 0.188235)
 metadata/_custom_type_script = "uid://cmmyp6yb7p2f1"
@@ -219,7 +289,8 @@ position = Vector2(9, 4)
 texture = ExtResource("12_t4beu")
 offset = Vector2(8, 1)
 
-[node name="DragonLowerNeck" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso"]
+[node name="DragonLowerNeck" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso" groups=["kotsu_ik"]]
+unique_name_in_owner = true
 position = Vector2(19, 8)
 texture = ExtResource("9_rjgf0")
 offset = Vector2(3, -1)
@@ -230,7 +301,7 @@ texture = ExtResource("10_xa010")
 offset = Vector2(4, -5.5)
 
 [node name="DragonHead" type="Sprite2D" parent="Visual/DragonBelly/DragonTorso/DragonLowerNeck/DragonUpperNeck"]
-position = Vector2(4.83152, -11.0298)
+position = Vector2(4.8315, -11.0298)
 texture = ExtResource("11_855dp")
 offset = Vector2(6, -2)
 
@@ -276,7 +347,7 @@ position = Vector2(-8, 3)
 texture = ExtResource("4_0gvji")
 offset = Vector2(-5, 0)
 
-[node name="DragonTail1" type="Sprite2D" parent="Visual/DragonBelly/DragonHips"]
+[node name="DragonTail1" type="Sprite2D" parent="Visual/DragonBelly/DragonHips" groups=["kotsu_ik"]]
 position = Vector2(-12, 1)
 texture = ExtResource("1_ut8cy")
 offset = Vector2(-7, 3)
@@ -310,6 +381,9 @@ position = Vector2(-9, 8)
 texture = ExtResource("6_0uu3o")
 offset = Vector2(3.5, 3.5)
 
+[node name="BackFootEnd" type="Node2D" parent="Visual/DragonBelly/DragonHips/LegBackFront/DragonBackThigh/DragonBackShin/DragonBackFoot"]
+position = Vector2(5, 10)
+
 [node name="LegBackBack" type="Node2D" parent="Visual/DragonBelly/DragonHips" groups=["kotsu_ik"]]
 modulate = Color(0.600561, 0.600561, 0.600561, 1)
 z_index = -1
@@ -329,10 +403,13 @@ position = Vector2(-9, 8)
 texture = ExtResource("6_0uu3o")
 offset = Vector2(3.5, 3.5)
 
+[node name="BackFootEnd" type="Node2D" parent="Visual/DragonBelly/DragonHips/LegBackBack/DragonBackThigh/DragonBackShin/DragonBackFoot"]
+position = Vector2(5, 10)
+
 [node name="LowFloorRaycast" type="RayCast2D" parent="."]
 unique_name_in_owner = true
 target_position = Vector2(0, 25)
 
 [node name="HighFloorRaycast" type="RayCast2D" parent="."]
 unique_name_in_owner = true
-target_position = Vector2(0, 38)
+target_position = Vector2(0, 48)

@@ -6,6 +6,7 @@ extends MarginContainer
 
 @onready var min_angle_line_edit: LineEdit = %MinAngleLineEdit
 @onready var max_angle_line_edit: LineEdit = %MaxAngleLineEdit
+@onready var lenght_label: Label = %LenghtLabel
 
 @onready var angle_visulazer: TextureProgressBar = %AngleVisualizer
 
@@ -31,6 +32,7 @@ func change_selected_joint(idx: int) -> void:
 	min_angle_line_edit.text = str(rad_to_deg(constrains[_armeture.LIMB_MIN]))
 	max_angle_line_edit.text = str(rad_to_deg(constrains[_armeture.LIMB_MAX]))
 	angle_visulazer.radial_initial_angle = angle_offset.value
+	lenght_label.text = str(constrains[_armeture.LIMB_LEN])
 	update_visualizer()
 
 func update_visualizer() -> void:

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://mdw8wf38bojf" path="res://addons/kotsu/scenes/joint_editor.tscn" id="2_n2ycy"]
 
 [node name="KotsuArmetureEditor" type="MarginContainer"]
+custom_minimum_size = Vector2(0, 128)
 offset_right = 162.0
 offset_bottom = 93.0
 script = ExtResource("1_m0hk7")
